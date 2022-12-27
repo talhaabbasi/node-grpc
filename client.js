@@ -23,3 +23,13 @@ client.createTodo(
 client.readTodos({}, (err, response) => {
   response.items.forEach((i) => console.log(i.text))
 })
+
+const call = client.readTodosStream()
+
+call.on("data", (item) => {
+  console.log(item)
+})
+
+call.on("end", (e) => {
+  console.log("Server done")
+})
